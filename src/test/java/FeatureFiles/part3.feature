@@ -1,6 +1,6 @@
 Feature: Part3
 
-  Scenario: New order creation and verification
+  Scenario: Checking the order creation functionality with incomplete form
     Given Navigate to the website
     When Enter the username and password and click on login button
     Then User should login successfully
