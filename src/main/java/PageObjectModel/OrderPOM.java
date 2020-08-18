@@ -58,6 +58,8 @@ public class OrderPOM extends BasePOM {
     public WebElement viewAllOrdersLink;
     @FindBy(xpath = "//table[@class='SampleTable']/tbody/tr[2]/td[preceding-sibling::td]")
     public List<WebElement>orderDetailList;
+    @FindBy(xpath = "//table[@class='SampleTable']/tbody/tr[7]/td[preceding-sibling::td]")
+    public List<WebElement>BobsDetailList;
 
     WebElement myElement;
 

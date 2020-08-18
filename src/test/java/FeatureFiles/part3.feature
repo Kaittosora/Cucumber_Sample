@@ -4,7 +4,6 @@ Feature: Part3
     Given Navigate to the website
     When Enter the username and password and click on login button
     Then User should login successfully
-#    When Create the order with "<product>"
     Then User fill the order form
       | quantity | customer name   | street         | city       | state   | zip   | card number | expiration date |
       |          | Kevin de Bruyne | Etihad Stadium | Manchester | England | 55555 | 1010101010  | 10/10           |
@@ -15,10 +14,9 @@ Feature: Part3
       | 2        | Kevin de Bruyne | Etihad Stadium | Manchester | England |       | 1010101010  | 10/10           |
       | 2        | Kevin de Bruyne | Etihad Stadium | Manchester | England | 55555 |             | 10/10           |
       | 2        | Kevin de Bruyne | Etihad Stadium | Manchester | England | 55555 | 1010101010  |                 |
+      | 2        | Kevin de Bruyne | Etihad Stadium | Manchester | England | 55555 | card        | 10/10           |
+      | 2        | Kevin de Bruyne | Etihad Stadium | Manchester | England | zip   | 1010101010  | 10/10           |
+      | two      | Kevin de Bruyne | Etihad Stadium | Manchester | England | 55555 | 1010101010  | 10/10           |
 
     Then It should be 8 orders on the page
-#    Examples:
-#      | product     |
-#      | MyMoney     |
-#      | FamilyAlbum |
-#      | ScreenSaver |
+
