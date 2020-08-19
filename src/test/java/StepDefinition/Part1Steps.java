@@ -27,26 +27,23 @@ public class Part1Steps {
 
     @Then("^User should login successfully$")
     public void userShouldLoginSuccessfully() {
-        order.ElementContainsText(order.welcomeMessage,"Welcome");
+        order.findElementAndVerifyElementContainText("welcomeMessage","Welcome");
 
     }
 
     @Then("^It should be (\\d+) orders on the page$")
-    public void itShouldBeOrdersOnThePage(int arg0) {
-        Assert.assertEquals(order.orderList.size(),8);
+    public void itShouldBeOrdersOnThePage(int num) {
+        order.findListAndVerifySize("orderList",num);
     }
 
     @When("^Delete all orders$")
     public void deleteAllOrders() {
-        for (WebElement element : order.checkboxList) {
-            element.click();
-        }
+        order.findElementAndClick("checkAllButton");
         order.findElementAndClick("deleteButton");
-
     }
 
     @Then("^All orders page should be empty$")
     public void allOrdersPageShouldBeEmpty() {
-        order.ElementContainsText(order.orderMessage,"empty");
+        order.findElementAndVerifyElementContainText("orderMessage","empty");
     }
 }

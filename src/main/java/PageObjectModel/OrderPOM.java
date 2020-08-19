@@ -1,13 +1,12 @@
 package PageObjectModel;
 
 import Utilities.Driver;
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.FindAll;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
 import java.util.List;
+import java.util.Map;
 
 public class OrderPOM extends BasePOM {
     public OrderPOM() {
@@ -15,51 +14,51 @@ public class OrderPOM extends BasePOM {
     }
 
     @FindBy(id = "ctl00_MainContent_username")
-    public WebElement usernameInput;
+    private WebElement usernameInput;
     @FindBy(id = "ctl00_MainContent_password")
-    public WebElement passwordInput;
+    private WebElement passwordInput;
     @FindBy(id = "ctl00_MainContent_login_button")
-    public WebElement loginButton;
+    private WebElement loginButton;
     @FindBy(css = ".login_info")
-    public WebElement welcomeMessage;
+    private WebElement welcomeMessage;
     @FindBy(css = ".SampleTable>tbody>tr:nth-child(n+2)")
-    public List<WebElement> orderList;
-    @FindBy(css = "input[type='checkbox']")
-    public List<WebElement> checkboxList;
+    private List<WebElement> orderList;
+    @FindBy(id = "ctl00_MainContent_btnCheckAll")
+    private WebElement checkAllButton;
     @FindBy(id = "ctl00_MainContent_btnDelete")
-    public WebElement deleteButton;
+    private WebElement deleteButton;
     @FindBy(id = "ctl00_MainContent_orderMessage")
-    public WebElement orderMessage;
+    private WebElement orderMessage;
     @FindBy(xpath = "//a[text()='Order']")
-    public WebElement orderLink;
+    private WebElement orderLink;
     @FindBy(id = "ctl00_MainContent_fmwOrder_ddlProduct")
-    public WebElement selectProduct;
+    private WebElement selectProduct;
     @FindBy(id = "ctl00_MainContent_fmwOrder_txtQuantity")
-    public WebElement quantityInput;
+    private WebElement quantityInput;
     @FindBy(id = "ctl00_MainContent_fmwOrder_txtName")
-    public WebElement cutomerNameInput;
+    private WebElement customerNameInput;
     @FindBy(id = "ctl00_MainContent_fmwOrder_TextBox2")
-    public WebElement streetInput;
+    private WebElement streetInput;
     @FindBy(id = "ctl00_MainContent_fmwOrder_TextBox3")
-    public WebElement cityInput;
+    private WebElement cityInput;
     @FindBy(id = "ctl00_MainContent_fmwOrder_TextBox4")
-    public WebElement stateInput;
+    private WebElement stateInput;
     @FindBy(id = "ctl00_MainContent_fmwOrder_TextBox5")
-    public WebElement zipInput;
+    private WebElement zipInput;
     @FindBy(id = "ctl00_MainContent_fmwOrder_cardList_0")
-    public WebElement visaCard;
+    private WebElement visaCard;
     @FindBy(id = "ctl00_MainContent_fmwOrder_TextBox6")
-    public WebElement cardNoInput;
+    private WebElement cardNoInput;
     @FindBy(id = "ctl00_MainContent_fmwOrder_TextBox1")
-    public WebElement expireDateInput;
+    private WebElement expireDateInput;
     @FindBy(id = "ctl00_MainContent_fmwOrder_InsertButton")
-    public WebElement processButton;
+    private WebElement processButton;
     @FindBy(xpath = "//a[text()='View all orders']")
-    public WebElement viewAllOrdersLink;
+    private WebElement viewAllOrdersLink;
     @FindBy(xpath = "//table[@class='SampleTable']/tbody/tr[2]/td[preceding-sibling::td]")
-    public List<WebElement>orderDetailList;
+    private List<WebElement>orderDetailList;
     @FindBy(xpath = "//table[@class='SampleTable']/tbody/tr[7]/td[preceding-sibling::td]")
-    public List<WebElement>BobsDetailList;
+    private List<WebElement>BobsDetailList;
 
     WebElement myElement;
 
@@ -84,6 +83,9 @@ public class OrderPOM extends BasePOM {
             case "viewAllOrdersLink":
                 myElement = viewAllOrdersLink;
                 break;
+                case "checkAllButton":
+                myElement = checkAllButton;
+                break;
 
         }
         waitAndClick(myElement);
@@ -101,7 +103,7 @@ public class OrderPOM extends BasePOM {
                 myElement = quantityInput;
                 break;
             case "cutomerNameInput":
-                myElement = cutomerNameInput;
+                myElement = customerNameInput;
                 break;
             case "streetInput":
                 myElement = streetInput;
@@ -124,5 +126,53 @@ public class OrderPOM extends BasePOM {
         }
         waitAndSendKeys(myElement, value);
     }
+    List<WebElement>myList;
+    public void findListAndVerifySize(String listName,int num){
+        switch (listName){
+            case "orderList":
+                myList=orderList;
+                break;
+            case "orderDetailList":
+                myList=orderDetailList;
+                break;
+        }
+        listSizeVerify(myList,num);
+    }
+    public void findElementAndVerifyElementContainText(String elementName , String text) {
 
+        switch (elementName) {
+            case "welcomeMessage":
+                myElement = welcomeMessage;
+                break;
+            case "orderMessage":
+                myElement = orderMessage;
+                break;
+        }
+        ElementContainsText(myElement, text);
+    }
+    public void findElementAndSelect(String elementName, String str){
+        switch (elementName){
+            case "selectProduct":
+                myElement=selectProduct;
+                break;
+        }
+        waitAndSelect(myElement,str);
+    }
+    public void findListAndCompareWithOtherOne(String listName, List<String>list){
+        switch (listName){
+            case "BobsDetailList":
+                myList=BobsDetailList;
+                break;
+        }
+        listContainsAllOtherList(BobsDetailList,list);
+    }
+
+    public void findListAndCompareWithMapValues(String listName, Map<String,String>map){
+        switch (listName){
+            case "orderDetailList":
+                myList=orderDetailList;
+                break;
+        }
+        listContainsAllOtherMapValues(orderDetailList,map);
+    }
 }

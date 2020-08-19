@@ -7,7 +7,6 @@ import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import cucumber.api.java.eo.Se;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
 
 import java.util.Map;
@@ -33,34 +32,18 @@ public class Part2Steps {
         order.findElementAndClick("processButton");
         order.findElementAndClick("viewAllOrdersLink");
 
-
-        Set<Map.Entry<String, String>> entries = fieldsMap.entrySet();
-        boolean flag = false;
-        for (Map.Entry<String, String> entry : entries) {
-            for (WebElement element : order.orderDetailList) {
-                if (entry.getValue().equals(element.getText())) {
-                    flag = true;
-                    break;
-                }
-            }
-            Assert.assertTrue(flag);
-        }
-
+        order.findListAndCompareWithMapValues("orderDetailList",fieldsMap);
     }
 
     @Then("^The order should be added to the all orders table$")
     public void theOrderShouldBeAddedToTheAllOrdersTable() {
-        Assert.assertEquals(order.orderList.size(),9);
-
-
-
+        order.findListAndVerifySize("orderList",9);
     }
 
     @When("^Create the order with \"([^\"]*)\"$")
-    public void createTheOrderWith(String product)  {
+    public void createTheOrderWith(String productName)  {
         order.findElementAndClick("orderLink");
-        Select select=new Select(order.selectProduct);
-        select.selectByVisibleText(product);
+        order.findElementAndSelect("selectProduct",productName);
 
     }
 }
